@@ -18,6 +18,13 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+#define BUFFER_SIZE 3
+
+typedef struct  s_buf{
+    char        buf[BUFFER_SIZE + 1];
+    char        remain[BUFFER_SIZE + 1];
+}               t_buf;
+
 int     get_next_line(int fd, char **line);
 size_t  ft_strlen(const char *s);
 char    *ft_strchr(const char *s, int c);

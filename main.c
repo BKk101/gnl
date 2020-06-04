@@ -2,16 +2,18 @@
 
 int main()
 {
-    int fd, num;
+    int fd1, fd2, num;
     char *str1;
     char str[100];
 
     num = 1;
-    //fd = open("/home/bykim/vscode/gnl/test.txt", O_RDONLY);
-    fd = 0;
+    fd1 = open("/home/bykim/vscode/gnl/test.txt", O_RDONLY);
+    fd2 = open("/home/bykim/vscode/gnl/test2.txt", O_RDONLY);
     while (num)
     {
-        num = get_next_line(fd, &str1);
+        num = get_next_line(fd1, &str1);
+        printf("%d %s\n", num, str1);
+        num = get_next_line(fd2, &str1);
         printf("%d %s\n", num, str1);
     }
     return 0;

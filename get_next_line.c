@@ -11,12 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define BUFFER_SIZE 3
-
-typedef struct  s_buf{
-    char        buf[BUFFER_SIZE + 1];
-    char        remain[BUFFER_SIZE + 1];
-}               t_buf;
 
 size_t  ft_strlen(const char *s)
 {
@@ -35,6 +29,8 @@ int get_next_line(int fd, char **line)
     char *move_pos;
     int byte;
     
+    if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
+		return (-1);
     byte = -1;
     str = ft_strjoin(buf_list[fd].remain, "");
     ft_memset(buf_list[fd].remain, 0, BUFFER_SIZE);
