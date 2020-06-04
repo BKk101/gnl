@@ -24,11 +24,11 @@ size_t	ft_strlen(const char *s)
 
 int		get_next_line(int fd, char **line)
 {
-	static t_buf	buf_list[2000] = {{0, 0},};
+	static t_buf	buf_list[2000] = {{0, 0}, };
 	char			*str;
 	char			*move_pos;
 	int				byte;
-	
+
 	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
 		return (-1);
 	byte = -1;
