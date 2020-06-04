@@ -12,20 +12,20 @@
 
 #include "get_next_line.h"
 
-char    *ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
-    char *ptr;
+	char *ptr;
 
-    ptr = (char *)s;
-    while (*ptr)
-    {
-        if (*ptr == (unsigned char)c)
-            return (ptr);
-        ptr++;
-    }
-    if (c == 0)
-        return (ptr);
-    return (0);
+	ptr = (char *)s;
+	while (*ptr)
+	{
+		if (*ptr == (unsigned char)c)
+			return (ptr);
+		ptr++;
+	}
+	if (c == 0)
+		return (ptr);
+	return (0);
 }
 
 char	*ft_strdup(const char *src, int len)
@@ -42,19 +42,19 @@ char	*ft_strdup(const char *src, int len)
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-    char	*temp;
-	char    *res;
-    int		len;
+	char	*temp;
+	char	*res;
+	int		len;
 	int		num;
 
 	len = 0;
 	while (s1[len])
 		len++;
 	num = 0;
-    while (s2[num++])
+	while (s2[num++])
 		len++;
-    if ((res = (char *)malloc(len + 1)) == 0)
-        return (0);
+	if ((res = (char *)malloc(len + 1)) == 0)
+		return (0);
 	temp = res;
 	num = 0;
 	while (s1[num] != '\0')
@@ -65,16 +65,16 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (res);
 }
 
-void    *ft_memset(void *s, int c, size_t n)
+void	*ft_memset(void *s, int c, size_t n)
 {
-    unsigned char   *temp;
-    unsigned long   idx;
+	unsigned char	*temp;
+	unsigned long	idx;
 
-    temp = (unsigned char *)s;
-    idx = 0;
-    while (idx < n)
-        temp[idx++] = (unsigned char)c;
-    return (s);
+	temp = (unsigned char *)s;
+	idx = 0;
+	while (idx < n)
+		temp[idx++] = (unsigned char)c;
+	return (s);
 }
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
