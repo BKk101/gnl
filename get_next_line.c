@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#define BUFFER_SIZE	32
 
 size_t	ft_strlen(const char *s)
 {
