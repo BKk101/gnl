@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define BUFFER_SIZE 20
+#define BUFFER_SIZE 3
 
 typedef struct  s_buf{
     char        buf[BUFFER_SIZE + 1];
@@ -41,15 +41,14 @@ int get_next_line(int fd, char **line)
     while (ft_strchr(str, '\n') == 0 && byte != 0)
     {
         byte = read(fd, buf_list[fd].buf, BUFFER_SIZE);
-        if (byte != 0)
-            str = ft_strjoin(str, buf_list[fd].buf);
+        str = ft_strjoin(str, buf_list[fd].buf);
+        ft_memset(buf_list[fd].buf, 0, BUFFER_SIZE);
     }
     if (ft_strchr(str, '\n') != 0)
     {
         *line = ft_strdup(str, ft_strchr(str, '\n') - str);
         move_pos = ft_strchr(str, '\n') + 1;
         ft_memmove(buf_list[fd].remain, move_pos, ft_strlen(str) - (move_pos - str));
-        ft_memset(buf_list[fd].buf, 0, BUFFER_SIZE);
     }
     else
         *line = ft_strdup(str, ft_strlen(str));
