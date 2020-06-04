@@ -7,7 +7,7 @@ int main()
     char str[100];
 
     num = 1;
-    fd = open("test.txt", O_RDONLY);
+    fd = open("/home/bykim/vscode/gnl/test.txt", O_RDONLY);
     while (num)
     {
         num = get_next_line(fd, &str1);

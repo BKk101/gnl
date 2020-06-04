@@ -1,4 +1,2 @@
-i
-like
-coffee
+ilikecoffee
 .

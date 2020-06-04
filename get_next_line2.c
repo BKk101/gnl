@@ -11,12 +11,11 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define BUFFER_SIZE 2
+#define BUFFER_SIZE 20
 
 typedef struct  s_buf{
-    char        buf[BUFFER_SIZE];
-    char        c;
-    char        remain[BUFFER_SIZE];
+    char        buf[BUFFER_SIZE + 1];
+    char        remain[BUFFER_SIZE + 1];
 }               t_buf;
 
 size_t  ft_strlen(const char *s)
@@ -31,29 +30,31 @@ size_t  ft_strlen(const char *s)
 
 int get_next_line(int fd, char **line)
 {
-    static t_buf buf_list[2000] = {{0, 0, 0},};
+    static t_buf buf_list[2000] = {{0, 0},};
     char *str;
     char *move_pos;
-    int num;
+    int byte;
     
-    num = -1;
+    byte = -1;
     str = ft_strjoin(buf_list[fd].remain, "");
-    while (ft_strchr(str, '\n') == 0 && num != 0)
+    ft_memset(buf_list[fd].remain, 0, BUFFER_SIZE);
+    while (ft_strchr(str, '\n') == 0 && byte != 0)
     {
-        num = read(fd, buf_list[fd].buf, BUFFER_SIZE);
-        str = ft_strjoin(str, buf_list[fd].buf);
+        byte = read(fd, buf_list[fd].buf, BUFFER_SIZE);
+        if (byte != 0)
+            str = ft_strjoin(str, buf_list[fd].buf);
     }
     if (ft_strchr(str, '\n') != 0)
     {
         *line = ft_strdup(str, ft_strchr(str, '\n') - str);
-        move_pos = ft_strchr(buf_list[fd].buf, '\n') + 1;
-        ft_memmove(buf_list[fd].remain, move_pos, BUFFER_SIZE - (move_pos - buf_list[fd].buf));
+        move_pos = ft_strchr(str, '\n') + 1;
+        ft_memmove(buf_list[fd].remain, move_pos, ft_strlen(str) - (move_pos - str));
         ft_memset(buf_list[fd].buf, 0, BUFFER_SIZE);
     }
     else
         *line = ft_strdup(str, ft_strlen(str));
     free(str);
-    if (num == 0)
+    if (byte == 0)
         return (0);
     else
         return (1);
