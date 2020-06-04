@@ -18,6 +18,8 @@
 # include <fcntl.h>
 # include <stdio.h>
 
+# define BUFFER_SIZE 32
+
 typedef struct	s_buf{
 	char		buf[BUFFER_SIZE + 1];
 	char		remain[BUFFER_SIZE + 1];

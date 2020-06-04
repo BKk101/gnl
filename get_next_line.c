@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#define BUFFER_SIZE	32
 
 size_t	ft_strlen(const char *s)
 {
@@ -23,34 +22,40 @@ size_t	ft_strlen(const char *s)
 	return (len);
 }
 
-int		get_next_line(int fd, char **line)
+int		my_gnl(int fd, char **line, t_buf *list)
 {
-	static t_buf	buf_list[2000] = {{0, 0}, };
-	char			*str;
-	char			*move_pos;
-	int				byte;
+	char	*str;
+	char	*move_pos;
+	int		byte;
 
-	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
-		return (-1);
 	byte = -1;
-	str = ft_strjoin(buf_list[fd].remain, "");
-	ft_memset(buf_list[fd].remain, 0, BUFFER_SIZE);
+	str = ft_strjoin("", list[fd].remain);//free?
+	ft_memset(list[fd].remain, 0, BUFFER_SIZE);
 	while (ft_strchr(str, '\n') == 0 && byte != 0)
 	{
-		byte = read(fd, buf_list[fd].buf, BUFFER_SIZE);
-		str = ft_strjoin(str, buf_list[fd].buf);
-		ft_memset(buf_list[fd].buf, 0, BUFFER_SIZE);
+		byte = read(fd, list[fd].buf, BUFFER_SIZE);
+		str = ft_strjoin(str, list[fd].buf);
+		ft_memset(list[fd].buf, 0, BUFFER_SIZE);
 	}
 	if (ft_strchr(str, '\n') != 0)
 	{
 		*line = ft_strdup(str, ft_strchr(str, '\n') - str);
 		move_pos = ft_strchr(str, '\n') + 1;
-		ft_memmove(buf_list[fd].remain, move_pos, ft_strlen(str) - (move_pos - str));
+		ft_memmove(list[fd].remain, move_pos, ft_strlen(str) - (move_pos - str));
 	}
 	else
 		*line = ft_strdup(str, ft_strlen(str));
 	free(str);
-	if (byte == 0)
+	return (byte);
+}
+
+int		get_next_line(int fd, char **line)
+{
+	static t_buf	buf_list[2000] = {{0, 0}, };
+
+	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
+		return (-1);
+	if (my_gnl(fd, line, buf_list) == 0)
 		return (0);
 	else
 		return (1);
