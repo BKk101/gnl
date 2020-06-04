@@ -4,7 +4,6 @@ int main()
 {
 	int fd1, fd2, num;
 	char *str1;
-	char str[100];
 
 	num = 1;
 	fd1 = open("/home/bykim/vscode/gnl/test.txt", O_RDONLY);
