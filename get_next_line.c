@@ -52,9 +52,8 @@ int		my_gnl(int fd, char **line, t_buf *list)
 
 int		get_next_line(int fd, char **line)
 {
-	static t_buf	buf_list[2000];
+	static t_buf	buf_list[2000] = {0};
 
-	ft_memset(buf_list, 0, sizeof(buf_list));
 	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
 		return (-1);
 	if (my_gnl(fd, line, buf_list) == 0)
