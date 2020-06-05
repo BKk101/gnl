@@ -52,7 +52,7 @@ int		my_gnl(int fd, char **line, t_buf *list)
 
 int		get_next_line(int fd, char **line)
 {
-	static t_buf	buf_list[2000] = {0};
+	static t_buf	buf_list[2000];
 
 	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
 		return (-1);
