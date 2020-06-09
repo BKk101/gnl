@@ -6,9 +6,10 @@ int main()
 	char *str1;
 
 	num = 1;
-	fd1 = open("/home/bykim/vscode/gnl/test.txt", O_RDONLY);
+	//fd1 = open("/home/bykim/vscode/gnl/test.txt", O_RDONLY);
+	fd1 = 3;
 	//fd2 = open("/home/bykim/vscode/gnl/test2.txt", O_RDONLY);
-	while (num)
+	while (num == 1)
 	{
 		num = get_next_line(fd1, &str1);
 		printf("%d %s\n", num, str1);

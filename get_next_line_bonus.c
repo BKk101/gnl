@@ -28,10 +28,10 @@ int		my_gnl(int fd, char **line, t_buf *list)
 	char	*move_pos;
 	int		byte;
 
-	byte = -1;
+	byte = 1;
 	str = ft_strjoin(ft_memset(malloc(1), 0, 1), list[fd].remain);
 	ft_memset(list[fd].remain, 0, BUFFER_SIZE);
-	while (ft_strchr(str, '\n') == 0 && byte != 0)
+	while (ft_strchr(str, '\n') == 0 && byte == 1)
 	{
 		byte = read(fd, list[fd].buf, BUFFER_SIZE);
 		str = ft_strjoin(str, list[fd].buf);
@@ -53,11 +53,15 @@ int		my_gnl(int fd, char **line, t_buf *list)
 int		get_next_line(int fd, char **line)
 {
 	static t_buf	buf_list[2000];
+	int				rtn;
 
 	if (fd < 0 || line == 0 || BUFFER_SIZE <= 0)
 		return (-1);
-	if (my_gnl(fd, line, buf_list) == 0)
+	rtn = my_gnl(fd, line, buf_list);
+	if (rtn == 0)
 		return (0);
+	else if (rtn == -1)
+		return (-1);
 	else
 		return (1);
 }
