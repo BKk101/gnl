@@ -31,7 +31,7 @@ int		my_gnl(int fd, char **line, t_buf *list)
 	byte = 1;
 	str = ft_strjoin(ft_memset(malloc(1), 0, 1), list[fd].remain);
 	ft_memset(list[fd].remain, 0, BUFFER_SIZE);
-	while (ft_strchr(str, '\n') == 0 && byte == 1)
+	while (ft_strchr(str, '\n') == 0 && byte > 0)
 	{
 		byte = read(fd, list[fd].buf, BUFFER_SIZE);
 		str = ft_strjoin(str, list[fd].buf);
